@@ -39,6 +39,10 @@ public class Task {
         return burstTime - consumedTime;
     }
 
+    public int getConsumedTime() {
+        return consumedTime;
+    }
+
     public void increaseConsumedTime(int consumedTime) {
         this.consumedTime += consumedTime;
     }
