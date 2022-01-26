@@ -39,8 +39,8 @@ public class Task {
         return burstTime - consumedTime;
     }
 
-    public void setConsumedTime(int consumedTime) {
-        this.consumedTime = consumedTime;
+    public void increaseConsumedTime(int consumedTime) {
+        this.consumedTime += consumedTime;
     }
 
     @Override

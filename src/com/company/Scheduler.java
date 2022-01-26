@@ -53,4 +53,38 @@ public class Scheduler {
             }
         }
     }
+
+    public void RR(LinkedList<Task> tasks, int quantum) {
+        readyQueue = new LinkedList<>(tasks);
+        int time = 0;
+        while (!readyQueue.isEmpty()) {
+            Task runningTask = readyQueue.pop();
+            if (runningTask.getRemainingTime() >= quantum) {
+                runningTask.increaseConsumedTime(quantum);
+
+                System.out.println("Time: " + time + " -> " + (time + quantum));
+                System.out.print("Ready queue: ");
+                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
+                System.out.println();
+                System.out.println("Running task: " + runningTask.getName());
+                System.out.println();
+                if (runningTask.getRemainingTime() > 0) {
+                    readyQueue.add(runningTask);
+                }
+
+                time += quantum;
+            } else {
+                System.out.println("Time: " + time + " -> " + (time + runningTask.getRemainingTime()));
+                System.out.print("Ready queue: ");
+                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
+                System.out.println();
+                System.out.println("Running task: " + runningTask.getName());
+                System.out.println();
+
+                time += runningTask.getRemainingTime();
+                runningTask.increaseConsumedTime(runningTask.getRemainingTime());
+            }
+        }
+
+    }
 }
