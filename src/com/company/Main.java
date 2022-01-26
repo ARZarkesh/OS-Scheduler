@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 public class Main {
 
@@ -16,7 +17,6 @@ public class Main {
             File file = new File("src/com/company/input.txt");
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            StringBuffer sb = new StringBuffer();
             String line;
             while ((line = br.readLine()) != null) {
                 String[] splited = line.split("\\s+");
@@ -29,6 +29,19 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Choose the algorithm: ");
+        System.out.println("1. FCFS");
+        Scanner scanner = new Scanner(System.in);
+        int algorithmNumber = scanner.nextInt();
+
+        if (algorithmNumber == 1) {
+            Scheduler scheduler = new Scheduler();
+            scheduler.FCFS(tasks);
+        } else {
+            System.out.println("Algorithm doesn't exist");
+        }
+
 //        Queue ready = new LinkedList();
 //        Thread mainThread = new Thread() {
 //            public void run() {

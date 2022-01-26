@@ -23,7 +23,28 @@ public class Task {
         return priority;
     }
 
+    public int getPriorityValue() throws Exception {
+        if (priority == 'X') return 1;
+        else if (priority == 'Y') return 2;
+        else if (priority == 'Z') return 3;
+
+        throw new Exception("The priority is invalid");
+    }
+
     public int getBurstTime() {
         return burstTime;
+    }
+
+    public int getRemainingTime() {
+        return burstTime - consumedTime;
+    }
+
+    public void setConsumedTime(int consumedTime) {
+        this.consumedTime = consumedTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Task: " + this.name;
     }
 }
