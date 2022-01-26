@@ -41,14 +41,5 @@ public class Main {
         } else {
             System.out.println("Algorithm doesn't exist");
         }
-
-//        Queue ready = new LinkedList();
-//        Thread mainThread = new Thread() {
-//            public void run() {
-//                System.out.println("t1 running");
-//            }
-//        };
-//        mainThread.start();
-
     }
 }

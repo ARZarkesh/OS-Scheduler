@@ -23,12 +23,12 @@ public class Task {
         return priority;
     }
 
-    public int getPriorityValue() throws Exception {
-        if (priority == 'X') return 1;
+    public int getPriorityValue() {
+        if (priority == 'X') return 3; // the lowest
         else if (priority == 'Y') return 2;
-        else if (priority == 'Z') return 3;
+        else if (priority == 'Z') return 1; // the highest
 
-        throw new Exception("The priority is invalid");
+        return 0;
     }
 
     public int getBurstTime() {
