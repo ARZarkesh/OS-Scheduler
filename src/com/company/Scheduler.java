@@ -22,7 +22,6 @@ public class Scheduler {
                 System.out.println();
                 time++;
             }
-
         }
     }
 
@@ -39,7 +38,6 @@ public class Scheduler {
                 }
             }
         });
-
         while (!readyQueue.isEmpty()) {
             readyQueue.sort((o1, o2) -> o1.getPriorityValue() - o2.getPriorityValue());
             Task runningTask = readyQueue.pop();
@@ -53,8 +51,6 @@ public class Scheduler {
                 System.out.println();
                 time++;
             }
-
         }
-
     }
 }
