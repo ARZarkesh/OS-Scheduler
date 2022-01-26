@@ -32,12 +32,16 @@ public class Main {
 
         System.out.println("Choose the algorithm: ");
         System.out.println("1. FCFS");
+        System.out.println("2. SJF");
         Scanner scanner = new Scanner(System.in);
         int algorithmNumber = scanner.nextInt();
 
         if (algorithmNumber == 1) {
             Scheduler scheduler = new Scheduler();
             scheduler.FCFS(tasks);
+        } else if (algorithmNumber == 2) {
+            Scheduler scheduler = new Scheduler();
+            scheduler.SJF(tasks);
         } else {
             System.out.println("Algorithm doesn't exist");
         }
