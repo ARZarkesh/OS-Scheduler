@@ -14,11 +14,7 @@ public class Scheduler {
             int burstTime = runningTask.getBurstTime();
             for (int i = 0; i < burstTime; i++) {
                 System.out.println("Time: " + time + " -> " + (time + 1));
-                System.out.print("Ready queue: ");
-                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
-                System.out.println();
-                System.out.println("Running task: " + runningTask.getName());
-                System.out.println();
+                printInfo(runningTask);
                 time++;
             }
         }
@@ -43,14 +39,18 @@ public class Scheduler {
             int burstTime = runningTask.getBurstTime();
             for (int i = 0; i < burstTime; i++) {
                 System.out.println("Time: " + time + " -> " + (time + 1));
-                System.out.print("Ready queue: ");
-                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
-                System.out.println();
-                System.out.println("Running task: " + runningTask.getName());
-                System.out.println();
+                printInfo(runningTask);
                 time++;
             }
         }
+    }
+
+    private void printInfo(Task runningTask) {
+        System.out.print("Ready queue: " + Color.YELLOW);
+        readyQueue.forEach(task -> System.out.print(task.getName() + " "));
+        System.out.println(Color.RESET);
+        System.out.println("Running task: " + Color.RED_BACKGROUND + runningTask.getName() + Color.RESET);
+        System.out.println();
     }
 
     public int RR(LinkedList<Task> tasks, int quantum, int initTime) {
@@ -62,11 +62,7 @@ public class Scheduler {
                 runningTask.increaseConsumedTime(quantum);
 
                 System.out.println("Time: " + time + " -> " + (time + quantum));
-                System.out.print("Ready queue: ");
-                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
-                System.out.println();
-                System.out.println("Running task: " + runningTask.getName());
-                System.out.println();
+                printInfo(runningTask);
                 if (runningTask.getRemainingTime() > 0) {
                     readyQueue.add(runningTask);
                 }
@@ -74,11 +70,7 @@ public class Scheduler {
                 time += quantum;
             } else {
                 System.out.println("Time: " + time + " -> " + (time + runningTask.getRemainingTime()));
-                System.out.print("Ready queue: ");
-                readyQueue.forEach(task -> System.out.print(task.getName() + " "));
-                System.out.println();
-                System.out.println("Running task: " + runningTask.getName());
-                System.out.println();
+                printInfo(runningTask);
 
                 time += runningTask.getRemainingTime();
                 runningTask.increaseConsumedTime(runningTask.getRemainingTime());
@@ -100,11 +92,7 @@ public class Scheduler {
         while (!readyQueue.isEmpty()) {
             Task runningTask = readyQueue.pop();
             System.out.println("Time: " + time + " -> " + (time + runningTask.getRemainingTime()));
-            System.out.print("Ready queue: ");
-            readyQueue.forEach(task -> System.out.print(task.getName() + " "));
-            System.out.println();
-            System.out.println("Running task: " + runningTask.getName());
-            System.out.println();
+            printInfo(runningTask);
 
             time += runningTask.getRemainingTime();
             runningTask.increaseConsumedTime(runningTask.getRemainingTime());
@@ -123,17 +111,17 @@ public class Scheduler {
         int time = 0;
 
         while (!queue1.isEmpty()) {
-            System.out.println("Queue Level 1: ");
+            System.out.println(Color.RED + "Queue Level 1: " + Color.RESET);
             time = RR(queue1, 2, time);
         }
 
         while (!queue2.isEmpty()) {
-            System.out.println("Queue Level 2: ");
+            System.out.println(Color.RED + "Queue Level 2: " + Color.RESET);
             time = RR(queue2, 4, time);
         }
 
         while (!queue3.isEmpty()) {
-            System.out.println("Queue Level 3: ");
+            System.out.println(Color.RED + "Queue Level 3: " + Color.RESET);
             time = RR(queue3, 8, time);
         }
     }
