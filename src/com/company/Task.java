@@ -13,6 +13,7 @@ public class Task {
         this.name = name;
         this.priority = priority;
         this.burstTime = burstTime;
+        this.state = State.READY;
     }
 
     public String getName() {
@@ -50,5 +51,9 @@ public class Task {
     @Override
     public String toString() {
         return "Task: " + this.name;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 }

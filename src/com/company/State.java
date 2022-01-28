@@ -4,4 +4,5 @@ public enum State {
     READY,
     WAITING,
     RUNNING,
+    EXIT,
 }

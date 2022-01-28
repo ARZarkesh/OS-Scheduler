@@ -11,12 +11,12 @@ public class Scheduler {
         int time = 0;
         while (!readyQueue.isEmpty()) {
             Task runningTask = readyQueue.pop();
+            runningTask.setState(State.RUNNING);
             int burstTime = runningTask.getBurstTime();
-            for (int i = 0; i < burstTime; i++) {
-                System.out.println("Time: " + time + " -> " + (time + 1));
-                printInfo(runningTask);
-                time++;
-            }
+            System.out.println("Time: " + time + " -> " + (time + burstTime));
+            printInfo(runningTask);
+            time += burstTime;
+            runningTask.setState(State.EXIT);
         }
     }
 
@@ -36,12 +36,14 @@ public class Scheduler {
         while (!readyQueue.isEmpty()) {
             readyQueue.sort((o1, o2) -> o1.getPriorityValue() - o2.getPriorityValue());
             Task runningTask = readyQueue.pop();
+            runningTask.setState(State.RUNNING);
             int burstTime = runningTask.getBurstTime();
             for (int i = 0; i < burstTime; i++) {
                 System.out.println("Time: " + time + " -> " + (time + 1));
                 printInfo(runningTask);
                 time++;
             }
+            runningTask.setState(State.EXIT);
         }
     }
 
@@ -58,6 +60,7 @@ public class Scheduler {
         int time = initTime;
         while (!readyQueue.isEmpty()) {
             Task runningTask = readyQueue.pop();
+            runningTask.setState(State.RUNNING);
             if (runningTask.getRemainingTime() >= quantum) {
                 runningTask.increaseConsumedTime(quantum);
 
@@ -68,12 +71,14 @@ public class Scheduler {
                 }
 
                 time += quantum;
+                runningTask.setState(State.EXIT);
             } else {
                 System.out.println("Time: " + time + " -> " + (time + runningTask.getRemainingTime()));
                 printInfo(runningTask);
 
                 time += runningTask.getRemainingTime();
                 runningTask.increaseConsumedTime(runningTask.getRemainingTime());
+                runningTask.setState(State.EXIT);
             }
         }
 
@@ -91,11 +96,13 @@ public class Scheduler {
 
         while (!readyQueue.isEmpty()) {
             Task runningTask = readyQueue.pop();
+            runningTask.setState(State.RUNNING);
             System.out.println("Time: " + time + " -> " + (time + runningTask.getRemainingTime()));
             printInfo(runningTask);
 
             time += runningTask.getRemainingTime();
             runningTask.increaseConsumedTime(runningTask.getRemainingTime());
+            runningTask.setState(State.EXIT);
             sortHRRNReadyQueue(readyQueue, time);
         }
     }
