@@ -39,23 +39,25 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         int algorithmNumber = scanner.nextInt();
 
-        if (algorithmNumber == 1) {
-            Scheduler scheduler = new Scheduler();
-            scheduler.FCFS(tasks);
-        } else if (algorithmNumber == 2) {
-            Scheduler scheduler = new Scheduler();
-            scheduler.SJF(tasks);
-        } else if (algorithmNumber == 3) {
-            Scheduler scheduler = new Scheduler();
-            scheduler.RR(tasks, 2);
-        } else if (algorithmNumber == 4) {
-            Scheduler scheduler = new Scheduler();
-            scheduler.HRRN(tasks);
-        } else if (algorithmNumber == 5) {
-            Scheduler scheduler = new Scheduler();
-            scheduler.MLFQ(tasks);
-        } else {
-            System.out.println("Algorithm doesn't exist");
+        Scheduler scheduler = new Scheduler();
+        switch (algorithmNumber) {
+            case 1:
+                scheduler.FCFS(tasks);
+                break;
+            case 2:
+                scheduler.SJF(tasks);
+                break;
+            case 3:
+                scheduler.RR(tasks, 2);
+                break;
+            case 4:
+                scheduler.HRRN(tasks);
+                break;
+            case 5:
+                scheduler.MLFQ(tasks);
+                break;
+            default:
+                System.out.println("Algorithm doesn't exist");
         }
     }
 }
