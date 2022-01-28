@@ -54,7 +54,7 @@ public class Main {
                 scheduler.HRRN(tasks);
                 break;
             case 5:
-                scheduler.MLFQ(tasks);
+                scheduler.MLFQ(tasks, 2);
                 break;
             default:
                 System.out.println("Algorithm doesn't exist");

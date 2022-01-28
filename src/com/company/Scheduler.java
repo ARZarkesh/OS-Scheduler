@@ -100,7 +100,7 @@ public class Scheduler {
         }
     }
 
-    public void MLFQ(LinkedList<Task> tasks) {
+    public void MLFQ(LinkedList<Task> tasks, int initQuantum) {
         LinkedList<Task> queue1 = new LinkedList<>(tasks);
         queue1.removeIf(task -> task.getPriority() != 'Z');
         LinkedList<Task> queue2 = new LinkedList<>(tasks);
@@ -112,17 +112,17 @@ public class Scheduler {
 
         while (!queue1.isEmpty()) {
             System.out.println(Color.RED + "Queue Level 1: " + Color.RESET);
-            time = RR(queue1, 2, time);
+            time = RR(queue1, initQuantum, time);
         }
 
         while (!queue2.isEmpty()) {
             System.out.println(Color.RED + "Queue Level 2: " + Color.RESET);
-            time = RR(queue2, 4, time);
+            time = RR(queue2, initQuantum * 2, time);
         }
 
         while (!queue3.isEmpty()) {
             System.out.println(Color.RED + "Queue Level 3: " + Color.RESET);
-            time = RR(queue3, 8, time);
+            time = RR(queue3, initQuantum * 4, time);
         }
     }
 
