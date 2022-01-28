@@ -53,9 +53,9 @@ public class Scheduler {
         }
     }
 
-    public void RR(LinkedList<Task> tasks, int quantum) {
-        readyQueue = new LinkedList<>(tasks);
-        int time = 0;
+    public int RR(LinkedList<Task> tasks, int quantum, int initTime) {
+        readyQueue = tasks;
+        int time = initTime;
         while (!readyQueue.isEmpty()) {
             Task runningTask = readyQueue.pop();
             if (runningTask.getRemainingTime() >= quantum) {
@@ -85,6 +85,11 @@ public class Scheduler {
             }
         }
 
+        return time;
+    }
+
+    public int RR(LinkedList<Task> tasks, int quantum) {
+        return RR(tasks, quantum, 0);
     }
 
     public void HRRN(LinkedList<Task> tasks) {
@@ -101,9 +106,35 @@ public class Scheduler {
             System.out.println("Running task: " + runningTask.getName());
             System.out.println();
 
-            time+= runningTask.getRemainingTime();
+            time += runningTask.getRemainingTime();
             runningTask.increaseConsumedTime(runningTask.getRemainingTime());
             sortHRRNReadyQueue(readyQueue, time);
+        }
+    }
+
+    public void MLFQ(LinkedList<Task> tasks) {
+        LinkedList<Task> queue1 = new LinkedList<>(tasks);
+        queue1.removeIf(task -> task.getPriority() != 'Z');
+        LinkedList<Task> queue2 = new LinkedList<>(tasks);
+        queue2.removeIf(task -> task.getPriority() != 'Y');
+        LinkedList<Task> queue3 = new LinkedList<>(tasks);
+        queue3.removeIf(task -> task.getPriority() != 'X');
+
+        int time = 0;
+
+        while (!queue1.isEmpty()) {
+            System.out.println("Queue Level 1: ");
+            time = RR(queue1, 2, time);
+        }
+
+        while (!queue2.isEmpty()) {
+            System.out.println("Queue Level 2: ");
+            time = RR(queue2, 4, time);
+        }
+
+        while (!queue3.isEmpty()) {
+            System.out.println("Queue Level 3: ");
+            time = RR(queue3, 8, time);
         }
     }
 

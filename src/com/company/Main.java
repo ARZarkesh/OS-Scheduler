@@ -35,6 +35,7 @@ public class Main {
         System.out.println("2. SJF");
         System.out.println("3. Round-Robin");
         System.out.println("4. HRRN");
+        System.out.println("5. MLFQ");
         Scanner scanner = new Scanner(System.in);
         int algorithmNumber = scanner.nextInt();
 
@@ -47,12 +48,13 @@ public class Main {
         } else if (algorithmNumber == 3) {
             Scheduler scheduler = new Scheduler();
             scheduler.RR(tasks, 2);
-        }
-        else if (algorithmNumber == 4) {
+        } else if (algorithmNumber == 4) {
             Scheduler scheduler = new Scheduler();
             scheduler.HRRN(tasks);
-        }
-        else {
+        } else if (algorithmNumber == 5) {
+            Scheduler scheduler = new Scheduler();
+            scheduler.MLFQ(tasks);
+        } else {
             System.out.println("Algorithm doesn't exist");
         }
     }
